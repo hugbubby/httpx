@@ -1442,14 +1442,29 @@ class AsyncClient(BaseClient):
         if transport is not None:
             return transport
 
-        return AsyncHTTPTransport(
-            verify=verify,
-            cert=cert,
-            trust_env=trust_env,
-            http1=http1,
-            http2=http2,
-            limits=limits,
-        )
+        # Import AioHTTPTransport here to avoid circular imports
+        from ._transports.aiohttp import AioHTTPTransport
+
+        try:
+            # Use aiohttp as the default backend for async requests
+            return AioHTTPTransport(
+                verify=verify,
+                cert=cert,
+                trust_env=trust_env,
+                http1=http1,
+                http2=http2,
+                limits=limits,
+            )
+        except ImportError:
+            # Fall back to httpcore if aiohttp is not installed
+            return AsyncHTTPTransport(
+                verify=verify,
+                cert=cert,
+                trust_env=trust_env,
+                http1=http1,
+                http2=http2,
+                limits=limits,
+            )
 
     def _init_proxy_transport(
         self,
@@ -1461,15 +1476,31 @@ class AsyncClient(BaseClient):
         http2: bool = False,
         limits: Limits = DEFAULT_LIMITS,
     ) -> AsyncBaseTransport:
-        return AsyncHTTPTransport(
-            verify=verify,
-            cert=cert,
-            trust_env=trust_env,
-            http1=http1,
-            http2=http2,
-            limits=limits,
-            proxy=proxy,
-        )
+        # Import AioHTTPTransport here to avoid circular imports
+        from ._transports.aiohttp import AioHTTPTransport
+
+        try:
+            # Use aiohttp as the default backend for async requests with proxy
+            return AioHTTPTransport(
+                verify=verify,
+                cert=cert,
+                trust_env=trust_env,
+                http1=http1,
+                http2=http2,
+                limits=limits,
+                proxy=proxy,
+            )
+        except ImportError:
+            # Fall back to httpcore if aiohttp is not installed
+            return AsyncHTTPTransport(
+                verify=verify,
+                cert=cert,
+                trust_env=trust_env,
+                http1=http1,
+                http2=http2,
+                limits=limits,
+                proxy=proxy,
+            )
 
     def _transport_for_url(self, url: URL) -> AsyncBaseTransport:
         """

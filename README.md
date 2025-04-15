@@ -101,6 +101,18 @@ Or, to include the optional HTTP/2 support, use:
 $ pip install httpx[http2]
 ```
 
+For improved async performance with aiohttp:
+
+```shell
+$ pip install httpx[aiohttp]
+```
+
+For improved async performance with aiohttp and HTTP/2 support:
+
+```shell
+$ pip install httpx[aiohttp-http2]
+```
+
 HTTPX requires Python 3.8+.
 
 ## Documentation
@@ -137,6 +149,8 @@ As well as these optional installs:
 * `click` - Command line client support. *(Optional, with `httpx[cli]`)*
 * `brotli` or `brotlicffi` - Decoding for "brotli" compressed responses. *(Optional, with `httpx[brotli]`)*
 * `zstandard` - Decoding for "zstd" compressed responses. *(Optional, with `httpx[zstd]`)*
+* `aiohttp` - Alternative async backend for improved performance. *(Optional, with `httpx[aiohttp]`)*
+* `aiohttp_http2` - HTTP/2 support for aiohttp backend. *(Optional, with `httpx[aiohttp-http2]`)*
 
 A huge amount of credit is due to `requests` for the API layout that
 much of this work follows, as well as to `urllib3` for plenty of design

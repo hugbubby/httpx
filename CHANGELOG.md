@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## Unreleased
+
+### Added
+
+* Added `AioHTTPTransport` as an alternative transport backend for async requests. This transport uses `aiohttp` under the hood instead of `httpcore` for potentially improved performance in some scenarios. (Pull #--)
+* Added optional dependencies `httpx[aiohttp]` and `httpx[aiohttp-http2]` for using the aiohttp backend.
+* `AsyncClient` now uses `AioHTTPTransport` by default when `aiohttp` is installed, falling back to `AsyncHTTPTransport` when not available.
+
 ## 0.28.1 (6th December, 2024)
 
 * Fix SSL case where `verify=False` together with client side certificates.

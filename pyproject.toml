@@ -55,6 +55,13 @@ socks = [
 zstd = [
   "zstandard>=0.18.0",
 ]
+aiohttp = [
+    "aiohttp>=3.8.0",
+]
+aiohttp-http2 = [
+    "aiohttp>=3.8.0",
+    "aiohttp_http2>=0.4.0",
+]
 
 [project.scripts]
 httpx = "httpx:main"

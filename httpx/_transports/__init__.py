@@ -3,6 +3,7 @@ from .base import *
 from .default import *
 from .mock import *
 from .wsgi import *
+from .aiohttp import *
 
 __all__ = [
     "ASGITransport",
@@ -12,4 +13,5 @@ __all__ = [
     "HTTPTransport",
     "MockTransport",
     "WSGITransport",
+    "AioHTTPTransport",
 ]
